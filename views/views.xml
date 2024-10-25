@@ -1,0 +1,85 @@
+<odoo>
+  <data>
+
+    <record id="view_partner_form_inherit_pricelist" model="ir.ui.view">
+      <field name="name">res.partner.form.pricelist</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <!-- Price list fieldini mevcut pricelist fieldının altına ekliyoruz -->
+        <xpath expr="//field[@name='vat']" position="after">
+          <field name="pricelist_ids" widget="many2many_tags" options="{'no_create': True}"/>
+        </xpath>
+      </field>
+    </record>
+
+<!--    <template id="inherit_pricelist_list" inherit_id="website_sale.pricelist_list">-->
+<!--        <xpath expr="//t/t-foreach[@t-as='pl']" position="attributes">-->
+<!--            <attribute name="t-foreach">user.partner_id.pricelist_ids</attribute>-->
+<!--        </xpath>-->
+<!--        <xpath expr="//t/t-if" position="replace">-->
+<!--            <t t-if="pl.id in user.partner_id.pricelist_ids.ids">-->
+<!--                <a role="menuitem" t-att-href="'/shop/change_pricelist/%s' % pl.id" class="dropdown-item">-->
+<!--                    <span class="switcher_pricelist" t-att-data-pl_id="pl.id" t-esc="pl.name" />-->
+<!--                </a>-->
+<!--            </t>-->
+<!--        </xpath>-->
+<!--    </template>-->
+    <!-- explicit list view definition -->
+    <!--
+        <record model="ir.ui.view" id="private_pricelist.list">
+          <field name="name">private_pricelist list</field>
+          <field name="model">private_pricelist.private_pricelist</field>
+          <field name="arch" type="xml">
+            <tree>
+              <field name="name"/>
+              <field name="value"/>
+              <field name="value2"/>
+            </tree>
+          </field>
+        </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+        <record model="ir.actions.act_window" id="private_pricelist.action_window">
+          <field name="name">private_pricelist window</field>
+          <field name="res_model">private_pricelist.private_pricelist</field>
+          <field name="view_mode">tree,form</field>
+        </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+        <record model="ir.actions.server" id="private_pricelist.action_server">
+          <field name="name">private_pricelist server</field>
+          <field name="model_id" ref="model_private_pricelist_private_pricelist"/>
+          <field name="state">code</field>
+          <field name="code">
+            action = {
+              "type": "ir.actions.act_window",
+              "view_mode": "tree,form",
+              "res_model": model._name,
+            }
+          </field>
+        </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+        <menuitem name="private_pricelist" id="private_pricelist.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+        <menuitem name="Menu 1" id="private_pricelist.menu_1" parent="private_pricelist.menu_root"/>
+        <menuitem name="Menu 2" id="private_pricelist.menu_2" parent="private_pricelist.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+        <menuitem name="List" id="private_pricelist.menu_1_list" parent="private_pricelist.menu_1"
+                  action="private_pricelist.action_window"/>
+        <menuitem name="Server to list" id="private_pricelist" parent="private_pricelist.menu_2"
+                  action="private_pricelist.action_server"/>
+    -->
+  </data>
+</odoo>
